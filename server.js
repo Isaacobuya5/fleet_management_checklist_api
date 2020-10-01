@@ -8,6 +8,7 @@ require("./src/db/db");
 const FleetRegister = require("./src/routes/FleetRegister");
 const StartTripRegister = require("./src/routes/StartTripRegister");
 const EndTripRegister = require("./src/routes/EndTripRegister");
+const ReportAccident = require("./src/routes/ReportAccident");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -18,7 +19,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.use('/api', FleetRegister, StartTripRegister, EndTripRegister);
+app.use('/api', FleetRegister, StartTripRegister, EndTripRegister, ReportAccident);
+
 
 
 
