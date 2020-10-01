@@ -1,4 +1,4 @@
-const FleetRegister  = require("../model/FleetRegister");
+const FleetRegister = require("../model/FleetRegister");
 
 
 
@@ -14,12 +14,12 @@ const registerVehicle = async (req, res) => {
     }
 }
 
-const getVehicleDetailsByReg =  async (req, res) => {
-    const regNum = req.params;
+const getVehicleDetailsByReg = async (req, res) => {
+    const { vehicleRegistration } = req.params;
     try {
-        const registeredVehicle = await FleetRegister.find({vehicle_registration: regNum});
+        const registeredVehicle = await FleetRegister.find({ vehicle_registration: vehicleRegistration });
         if (registeredVehicle) {
-        res.status(200).send(registeredVehicle);
+            res.status(200).send(registeredVehicle);
         } else {
             res.status(400).end();
         }
