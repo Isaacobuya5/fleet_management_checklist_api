@@ -18,7 +18,7 @@ const servicingReportSchema = new mongoose.Schema({
         required: true
     },
     parts_needed: {
-        type: Array,
+        type: String,
         required: true
     },
     comments: {
@@ -43,5 +43,5 @@ const servicingReportSchema = new mongoose.Schema({
     }
 });
 
-const ServicingReport = mongoose.model('ServiceReport', serviceReportSchema);
+const ServicingReport = mongoose.model('ServiceReport', servicingReportSchema);
 module.exports = ServicingReport;
