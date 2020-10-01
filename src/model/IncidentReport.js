@@ -31,5 +31,5 @@ const incidentReportSchema = new mongoose.Schema({
     }
 });
 
-const IncidentReport = mongoose.model('AccidentReport', incidentReportSchema);
+const IncidentReport = mongoose.model('IncidentReport', incidentReportSchema);
 module.exports = IncidentReport;
