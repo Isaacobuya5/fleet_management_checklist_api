@@ -17,7 +17,7 @@ const registerVehicle = async (req, res) => {
 const getVehicleDetailsByReg = async (req, res) => {
     const { vehicleRegistration } = req.params;
     try {
-        const registeredVehicle = await FleetRegister.find({ vehicle_registration: vehicleRegistration });
+        const registeredVehicle = await FleetRegister.findOne({ vehicle_registration: vehicleRegistration });
         if (registeredVehicle) {
             res.status(200).send(registeredVehicle);
         } else {
