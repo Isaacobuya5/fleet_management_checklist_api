@@ -1,21 +1,25 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const startTripSchema = new mongoose.Schema({
+const accidentReportSchema = new mongoose.Schema({
     vehicle_registration: {
         type: String,
         required: true
     },
-    current_odometer_reading: {
+    extent_damage: {
         type: String,
         required: true
     },
-    starting_point: {
+    comments: {
         type: String,
         required: true
     },
     date: {
         type: String,
         default: new Date().toLocaleDateString()
+    },
+    time: {
+        type: String,
+        default: new Date().toLocaleTimeString()
     },
     lat: {
         type: String,
@@ -24,13 +28,8 @@ const startTripSchema = new mongoose.Schema({
     long: {
         type: String,
         required: true
-    },
-    time: {
-        type: String,
-        default: new Date().toLocaleTimeString()
-    },
-}, {timestamps: true}   
-);
+    }
+});
 
-const StartTripRegister = mongoose.model('StartTripRegister', startTripSchema);
-module.exports = StartTripRegister;
+const AccidentReport = mongoose.model('AccidentReport', accidentReportSchema);
+module.exports = AccidentReport;

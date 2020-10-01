@@ -23,6 +23,7 @@ const getVehicleDetails =  async (req, res) => {
     }
 }
 
+
 module.exports = {
     registerVehicle,
     getVehicleDetails

@@ -1,15 +1,12 @@
 const mongoose = require("mongoose");
 
-const startTripSchema = new mongoose.Schema({
-    vehicle_registration: {
-        type: String,
-        required: true
-    },
+
+const endTripRegisterSchema = new mongoose.Schema({
     current_odometer_reading: {
         type: String,
         required: true
     },
-    starting_point: {
+    destination: {
         type: String,
         required: true
     },
@@ -29,8 +26,12 @@ const startTripSchema = new mongoose.Schema({
         type: String,
         default: new Date().toLocaleTimeString()
     },
-}, {timestamps: true}   
-);
+    trip_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'StartTripRegister'
+    }
+});
 
-const StartTripRegister = mongoose.model('StartTripRegister', startTripSchema);
-module.exports = StartTripRegister;
+const EndTripRegister = mongoose.model('EndTripRegister', endTripRegisterSchema);
+module.exports = EndTripRegister;

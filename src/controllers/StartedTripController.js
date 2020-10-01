@@ -19,6 +19,28 @@ const startTripDetails = async (req, res) => {
     }
 }
 
+// view all started registered vehicles
+const runningTrips = async (req, res) => {
+    try {
+        const currentTrips = await StartTripRegister.find({});
+        res.send(currentTrips);
+    } catch (error) {
+        res.send(error);
+    }
+}
+
+// delete all current trips
+const removeAllRunningTrips = async (req, res) => {
+    try {
+        await StartTripRegister.deleteMany({});
+        res.send({message: 'Delete succesful'});
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 module.exports = {
-    startTripDetails
+    startTripDetails,
+    runningTrips,
+    removeAllRunningTrips
 }
