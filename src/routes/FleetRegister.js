@@ -1,11 +1,12 @@
 const express = require("express");
 
-const { registerVehicle, getVehicleDetails } = require("../controllers/FleetRegisterController");
+const { registerVehicle, getVehicleDetailsByReg } = require("../controllers/FleetRegisterController");
 
 const router = express.Router();
 
-router.get('/all-vehicles', getVehicleDetails);
 
 router.post('/register-vehicle', registerVehicle);
+
+router.get('/get-vehicle/:vehicleRegistration', getVehicleDetailsByReg);
 
 module.exports = router;

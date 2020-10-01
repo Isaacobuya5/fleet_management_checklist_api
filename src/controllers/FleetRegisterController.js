@@ -14,17 +14,22 @@ const registerVehicle = async (req, res) => {
     }
 }
 
-const getVehicleDetails =  async (req, res) => {
+const getVehicleDetailsByReg =  async (req, res) => {
+    const regNum = req.params;
     try {
-        const registeredVehicle = await FleetRegister.find({});
-        res.send(registeredVehicle);
+        const registeredVehicle = await FleetRegister.find({vehicle_registration: regNum});
+        if (registeredVehicle) {
+        res.status(200).send(registeredVehicle);
+        } else {
+            res.status(400).end();
+        }
     } catch (error) {
-        res.status().send(error);
+        res.status(500).send(error);
     }
 }
 
 
 module.exports = {
     registerVehicle,
-    getVehicleDetails
+    getVehicleDetailsByReg
 }
