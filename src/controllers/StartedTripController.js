@@ -2,20 +2,38 @@ const StartTripRegister = require("../model/StartTripRegister");
 const FleetRegister  = require("../model/FleetRegister");
 
 const startTripDetails = async (req, res) => {
-    // first check if the vehicle is in the database
-    const { vehicle_registration } = req.body;
-    try {
-        const registeredVehicle = await FleetRegister.find({ vehicle_registration });
-        console.log(registeredVehicle.length);
-        // if vehicle not registered throw an error
-        if (registeredVehicle.length == 0) {
-            return res.status(500).send({ error: "Vehicle not registered yet"})
-        }
+    try {   
         const startTripRegister = new StartTripRegister(req.body);
         await startTripRegister.save();
         res.status(201).send(startTripRegister);
+        
     } catch (error) {
         res.status(400).send(error);
+    }
+}
+
+// change status of a trip
+const changeTripStatus = async (req, res) => {
+    const vehicle_registration = req.params;
+    try {  
+        // change status of this vehicle to started if not started already
+        // first check if this trip is started already
+        // find the vehicle first
+        const vehicle = await FleetRegister.findOne({ vehicle_registration });
+        // just ensure to throw error if this vehicle not found
+        if (!vehicle) throw new Error("Vehicle not found");
+
+        // destructuring the status
+        const { status } = vehicle;
+        //  if not started, we want to change its status
+        if (status == "not started") {
+            await FleetRegister.update({ status: "trip started" });
+        } else {
+            // we don't want to start an already started trip
+            throw new Error("This trip is in progress");
+        }
+    } catch (error) {
+        res.send(error);
     }
 }
 
@@ -42,5 +60,6 @@ const removeAllRunningTrips = async (req, res) => {
 module.exports = {
     startTripDetails,
     runningTrips,
-    removeAllRunningTrips
+    removeAllRunningTrips,
+    changeTripStatus
 }

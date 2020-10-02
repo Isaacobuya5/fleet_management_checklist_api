@@ -28,8 +28,8 @@ const startTripSchema = new mongoose.Schema({
     time: {
         type: String,
         default: new Date().toLocaleTimeString()
-    },
-}, {timestamps: true}   
+    }
+}
 );
 
 const StartTripRegister = mongoose.model('StartTripRegister', startTripSchema);

@@ -21,7 +21,11 @@ const fleetManagementSchema = new mongoose.Schema({
   electrical_check: electricalCheckSchema,
   mirror_check: mirrorsSchema,
   tire_check: tireCheckSchema,
-  general_check: generalCheckSchema
+  general_check: generalCheckSchema,
+  status: {
+    type: String,
+    default: "not started"
+  }
 });
 
 const FleetRegister = mongoose.model("FleetRegister", fleetManagementSchema);

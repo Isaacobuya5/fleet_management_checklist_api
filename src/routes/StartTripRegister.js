@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { startTripDetails, runningTrips, removeAllRunningTrips } = require("../controllers/StartedTripController");
+const { startTripDetails, runningTrips, removeAllRunningTrips, changeTripStatus } = require("../controllers/StartedTripController");
 
+router.put('/change-trip-status', changeTripStatus);
 router.post('/vehicle-details', startTripDetails);
 // get all currently running trips
 router.get("/current-trips", runningTrips);
