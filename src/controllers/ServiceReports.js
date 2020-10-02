@@ -10,7 +10,11 @@ const serviceReport = async (req, res) => {
             service_due_date, 
             garage: selectedGarage, 
             parts_needed, 
-            comments
+            comments,
+            date,
+            time,
+            lat,
+            long
         });
         await service.save();
         res.status(201).send(service);
