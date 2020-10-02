@@ -9,7 +9,7 @@ const fuelingReportSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    liters: {
+    litres: {
         type: Number,
         required: true
     },
