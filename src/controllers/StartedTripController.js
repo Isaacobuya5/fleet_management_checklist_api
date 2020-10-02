@@ -34,7 +34,8 @@ const changeTripStatus = async (req, res) => {
             return res.status(400).send("Trip is in progress");
         }
     } catch (error) {
-        res.send(error);
+        console.log(error);
+        res.status(500).send(error);
     }
 }
 
