@@ -28,7 +28,7 @@ const changeTripStatus = async (req, res) => {
         //  if not started, we want to change its status
         if (status == "not started") {
             await FleetRegister.update({ status: "trip started" });
-            return res.send("Successfuly started");
+            return res.status(200).send("Successfuly started");
         } else {
             // we don't want to start an already started trip
             return res.status(400).send("Trip is in progress");
