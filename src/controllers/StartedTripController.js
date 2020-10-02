@@ -21,16 +21,17 @@ const changeTripStatus = async (req, res) => {
         // find the vehicle first
         const vehicle = await FleetRegister.findOne({ vehicle_registration });
         // just ensure to throw error if this vehicle not found
-        if (!vehicle) throw new Error("Vehicle not found");
+        if (!vehicle) res.status(404).send("Vehicle not registered")
 
         // destructuring the status
         const { status } = vehicle;
         //  if not started, we want to change its status
         if (status == "not started") {
             await FleetRegister.update({ status: "trip started" });
+            return res.send("Successfuly started");
         } else {
             // we don't want to start an already started trip
-            throw new Error("This trip is in progress");
+            return res.status(400).send("Trip is in progress");
         }
     } catch (error) {
         res.send(error);
