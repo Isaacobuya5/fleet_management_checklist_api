@@ -5,7 +5,7 @@ const { endTripRegisterController, changeTripStatusToEnded } = require("../contr
 const router = express.Router();
 
 router.post('/end-trip', endTripRegisterController);
-router.put('/change-trip-ended', changeTripStatusToEnded);
+router.put('/change-trip-ended/:vehicle_registration', changeTripStatusToEnded);
 
 
 module.exports = router;
