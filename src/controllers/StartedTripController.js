@@ -14,7 +14,8 @@ const startTripDetails = async (req, res) => {
 
 // change status of a trip
 const changeTripStatus = async (req, res) => {
-    const vehicle_registration = req.params;
+    const { vehicle_registration } = req.params;
+
     try {  
         // change status of this vehicle to started if not started already
         // first check if this trip is started already
@@ -35,7 +36,7 @@ const changeTripStatus = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send(error);
+        res.status(500).send(error.message);
     }
 }
 
