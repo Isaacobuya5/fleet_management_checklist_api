@@ -11,6 +11,7 @@ const EndTripRegister = require("./src/routes/EndTripRegister");
 const ReportAccident = require("./src/routes/ReportAccident");
 const ReportIncidence = require("./src/routes/IncidentReport");
 const ServiceReport = require("./src/routes/ServiceReport");
+const FuelReport = require("./src/routes/FuelReport");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -21,7 +22,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.use('/api', FleetRegister, StartTripRegister, EndTripRegister, ReportAccident, ReportIncidence, ServiceReport);
+app.use('/api', FleetRegister, StartTripRegister, EndTripRegister, ReportAccident, ReportIncidence, ServiceReport, FuelReport);
 
 
 
