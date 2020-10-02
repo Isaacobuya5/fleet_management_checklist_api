@@ -1,5 +1,5 @@
 const EndTripRegister = require("../model/EndTripRegister");
-const StartTripRegister = require("../model/StartTripRegister");
+const FleetRegister = require("../model/FleetRegister");
 
 const endTripRegisterController = async (req, res) => {
 
