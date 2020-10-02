@@ -12,7 +12,7 @@ const startTripDetails = async (req, res) => {
     }
 }
 
-// change status of a trip
+// change status of a trip to started
 const changeTripStatus = async (req, res) => {
     const { vehicle_registration } = req.params;
 

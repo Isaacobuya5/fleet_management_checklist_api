@@ -2,21 +2,10 @@ const EndTripRegister = require("../model/EndTripRegister");
 const StartTripRegister = require("../model/StartTripRegister");
 
 const endTripRegisterController = async (req, res) => {
-    // get the vehicle_registration from req.params
-    const vehicleRegistration = req.params ? req.params : null;
-    // if null throw an error
-    if (!vehicleRegistration) throw new Error({ message: 'No vehicle registration found'})
+
     try {
         // if there check if a vehicle started a trip in the db
-        const vehicleFound = await StartTripRegister.find({vehicle_registration});
-        // check if there are any opened trips currently
-        if(!vehicleFound) {
-            throw new Error("No currently opened trip");
-        }
-        const endTripRegister = new EndTripRegister({
-            ...req.body,
-            trip_id: vehicleFound._id
-        });
+        const endTripRegister = new EndTripRegister(req.body);
         await endTripRegister.save();
         res.send(endTripRegister);
     } catch (error) {
@@ -24,6 +13,34 @@ const endTripRegisterController = async (req, res) => {
     }
 }
 
+// change status of a trip to ended
+const changeTripStatusToEnded = async (req, res) => {
+    const { vehicle_registration } = req.params;
+
+    try {  
+        // change status of this vehicle to ended if started already
+        // first check if this trip is started already
+        // find the vehicle first
+        const vehicle = await FleetRegister.findOne({ vehicle_registration });
+        // just ensure to throw error if this vehicle not found
+        if (!vehicle) res.status(404).send("Vehicle not registered")
+
+        // destructuring the status
+        const { status } = vehicle;
+        //  if  started, we want to change its status to ended
+        if (status == "trip started") {
+            await FleetRegister.update({ status: "trip ended" });
+            return res.status(200).send("Successfuly ended trip");
+        } else {
+            // we don't want to start an already started trip
+            return res.status(400).send("Trip is not in progress");
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
 module.exports = {
     endTripRegisterController,
+    changeTripStatusToEnded
 }
