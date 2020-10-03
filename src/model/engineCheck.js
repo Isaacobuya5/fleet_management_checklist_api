@@ -77,6 +77,7 @@ const engineCheckSchema = new mongoose.Schema({
     radiator_fluid: radiatorFluidAndCapSchema,
     clutch_break_fluid: clutchAndBrakeFluidSchema,
     fan_belt_tightness: fanBeltTightnessSchema,
+    exhaust_pipe: exhaustPipeConditionSchema,
     fuel_tank_cap_and_leaks: fuelTankCapAndLeaksSchema,
   });
 
